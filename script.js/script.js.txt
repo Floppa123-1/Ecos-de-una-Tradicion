@@ -1,0 +1,40 @@
+const paginas = [];
+
+for (let i = 1; i <= 20; i++) {
+    paginas.push(`imagenes/pg${i}.pdf.jpg`);
+}
+
+let actual = 0;
+
+const img = document.getElementById("imagen");
+const contador = document.getElementById("contador");
+
+function mostrar() {
+    img.classList.add("pasar");
+
+    setTimeout(() => {
+        img.src = paginas[actual];
+        contador.textContent = `Página ${actual + 1} de ${paginas.length}`;
+        img.classList.remove("pasar");
+    }, 300);
+}
+
+document.getElementById("siguiente").onclick = () => {
+    if (actual < paginas.length - 1) {
+        actual++;
+        mostrar();
+    }
+};
+
+document.getElementById("anterior").onclick = () => {
+    if (actual > 0) {
+        actual--;
+        mostrar();
+    }
+};
+
+img.onclick = () => {
+    img.classList.toggle("zoom");
+};
+
+mostrar();
